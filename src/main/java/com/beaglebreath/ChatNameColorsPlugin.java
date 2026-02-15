@@ -124,6 +124,12 @@ public class ChatNameColorsPlugin extends Plugin
 			return;
 		}
 		objectStack[size - 3] = ColorUtil.wrapWithColorTag(username, userColor.getColor());
+		if (config.colorEntireMessage())
+		{
+			final String message = (String) objectStack[size - 2];
+			objectStack[size - 2] = colorEntireMessagePreservingInnerTags(message, userColor.getColor());
+		}
+		log.info("stackSize={} top={}", size, Arrays.toString(Arrays.copyOfRange(objectStack, Math.max(0, size - 10), size)));
 	}
 
 	private UserColor getOrCreateUserColor(String username) {
@@ -280,6 +286,20 @@ public class ChatNameColorsPlugin extends Plugin
 			UserColor userColor = gson.fromJson(json, UserColor.class);
 			userToColorMap.put(username, userColor);
 		}
+	}
+	private String colorEntireMessagePreservingInnerTags(String message, Color color)
+	{
+		if (Strings.isNullOrEmpty(message) || color == null)
+		{
+			return message;
+		}
+
+		// If the message contains </col>, it would end our outer color early.
+		// Re-open our desired color after every close tag.
+		final String reopen = "<col=" + ColorUtil.toHexColor(color).substring(1) + ">";
+		final String patched = message.replace("</col>", "</col>" + reopen);
+
+		return ColorUtil.wrapWithColorTag(patched, color);
 	}
 
 }

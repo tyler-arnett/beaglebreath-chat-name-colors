@@ -37,4 +37,11 @@ public interface ChatNameColorsConfig extends Config
 		description = "Generate random colors for unspecified users"
 	)
 	default boolean randomlyGenerate() { return true; }
+
+	@ConfigItem(
+			keyName = "colorentiremessage",
+			name = "Color Entire Message",
+			description = "Color the entire chat message for users (not just their username)"
+	)
+	default boolean colorEntireMessage() { return false; }
 }
