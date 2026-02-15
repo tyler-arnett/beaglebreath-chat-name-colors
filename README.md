@@ -11,11 +11,7 @@ Simply hold down "Shift" and right click a username in chat or in your Friends l
 
 # Settings
 
-<<<<<<< HEAD
 Color Entire Message - Color the entire chat message for users (not just their username)
-=======
-Color Entire Message - Color the entire chat message instead of only the username
->>>>>>> 7dc916f (Update README)
 
 Color Your Name - Enables the ability to recolor your name in Chat
 
