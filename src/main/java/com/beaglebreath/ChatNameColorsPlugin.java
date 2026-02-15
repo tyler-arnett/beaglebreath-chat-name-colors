@@ -129,7 +129,6 @@ public class ChatNameColorsPlugin extends Plugin
 			final String message = (String) objectStack[size - 2];
 			objectStack[size - 2] = colorEntireMessagePreservingInnerTags(message, userColor.getColor());
 		}
-		log.info("stackSize={} top={}", size, Arrays.toString(Arrays.copyOfRange(objectStack, Math.max(0, size - 10), size)));
 	}
 
 	private UserColor getOrCreateUserColor(String username) {
